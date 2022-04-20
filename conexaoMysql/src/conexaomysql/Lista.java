@@ -32,4 +32,25 @@ public class Lista {
             System.out.println("Erro ao executar o comando: " + e);
         }
     }    
+    
+    public void vendedor() {
+
+        try {
+            PreparedStatement pesquisa = acesso.getConexao().prepareStatement("select * from vendedor limit 10");
+            ResultSet resultado = pesquisa.executeQuery();
+            while (resultado.next()) {
+                int codigo = Integer.parseInt(resultado.getString("cod_vend"));
+                String nome = resultado.getString("nome_vend");
+                float salario = Float.parseFloat(resultado.getString("sal_fixo"));
+                float faixa_comissao = Float.parseFloat(resultado.getString("faixa_comiss"));
+                
+                System.out.println("NOME: " + util.preencheComEspaco(nome, " ", 25, 1)
+                        + "SALÁRIO: " + salario
+                        + "FAIXA DE COMISSÃO: " + faixa_comissao);                        
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao executar o comando: " + e);
+        }
+    }   
 }
